@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Component from "./Component";
+import Contact from "./Contact";
+import Header from "./Header";
+import HeaderContext from "./HeaderContext";
 
 import { css } from "emotion";
 
 function App() {
+  const [menuItems, setMenuItems] = useState(["Home", "About", "Contact"]);
+
   return (
     <div className={app}>
-      <Component />
+      <Router>
+        <HeaderContext.Provider value={{ menuItems }}>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Component} />
+            <Route path="/contact" component={Contact} />
+          </Switch>
+        </HeaderContext.Provider>
+      </Router>
     </div>
   );
 }
