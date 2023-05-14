@@ -11,7 +11,9 @@ function Header() {
       <ul className={nav}>
         {menuItems.map((item) => (
           <li key={item}>
-            <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+            <Link className={menuItem} to={`/${item.toLowerCase()}`}>
+              {item}
+            </Link>
           </li>
         ))}
         <li></li>
@@ -21,9 +23,16 @@ function Header() {
 }
 
 const header = css`
-  background-color: #419d78;
+  background-color: darkred;
   color: white;
   padding: 1rem;
+`;
+
+const menuItem = css`
+  font-size: 20px;
+  font-family: Montserrat, sans-serif;
+  color: white;
+  text-decoration: none;
 `;
 
 const nav = css`

@@ -5,6 +5,7 @@ import Component from "./Component";
 import Contact from "./Contact";
 import Header from "./Header";
 import HeaderContext from "./HeaderContext";
+import About from "./About";
 
 import { css } from "emotion";
 
@@ -18,6 +19,7 @@ function App() {
           <Header />
           <Switch>
             <Route exact path="/" component={Component} />
+            <Route exact path="/about" component={About} />
             <Route path="/contact" component={Contact} />
           </Switch>
         </HeaderContext.Provider>
