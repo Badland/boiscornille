@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { css } from "emotion";
 
-function About() {
+function Home() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const myHeaders = new Headers();
+      myHeaders.append(
+        "Authorization",
+        "Bearer secret_9vpo9DFywqZUO0dxrNpuf9k3zAiMOQm11PqN5ZYlPN0"
+      );
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Notion-Version", "2022-06-28");
+
+      const raw = JSON.stringify({
+        filter: {
+          property: "flag",
+          multi_select: {
+            contains: "bloc accueil",
+          },
+        },
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+      };
+
+      const response = await fetch(
+        "https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/databases/0200c210-9c7e-4af5-ab37-3da0f0aac185/query",
+        requestOptions
+      );
+      const result = await response.text();
+      console.log(result);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className={about}>
       <div className={imageContainer}>
@@ -111,27 +147,20 @@ function About() {
 const about = css`
   display: flex;
   flex-direction: column;
-  padding: 10;
-  margin: 0;
+  padding: 0;
 `;
 
 const imageContainer = css`
+
   position: relative;
-  max-height: 100%;
-  margin-bottom: 10;
-  display: flex;
-  flex-direction: column;
 `;
 
 const image = css`
   width: 100%;
-  min-width: 1300px;
-  margin: 0;
 `;
 
 const overlay = css`
   position: absolute;
-  min-width: 1300px;
   top: 0;
   left: 0;
   width: 100%;
@@ -141,10 +170,6 @@ const overlay = css`
 
 const text = css`
   position: absolute;
-  width: 75%;
-  max-width: 150%;
-  min-width: 10%;
-  max-height: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -152,9 +177,6 @@ const text = css`
   font-size: 20px;
   font-family: Montserrat, sans-serif;
   text-align: center;
-  padding: 0;
-  word-wrap: break-word;
-  overflow: auto;
 
   p {
     margin-bottom: 1em;
@@ -166,4 +188,4 @@ const text = css`
   }
 `;
 
-export default About;
+export default Home;
