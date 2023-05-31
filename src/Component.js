@@ -5,7 +5,7 @@ import { css } from "emotion";
 function Component() {
   return (
     <div className={container}>
-      <div>Welcome to React Boiler Plate!</div>
+      <div>Bienvenue au Bois Cornillé</div>
       <div className={reactIcon}>⚛</div>
     </div>
   );
